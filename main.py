@@ -38,7 +38,7 @@ class LengthError(Exception):
 # Password generating
 def pass_gen_all(max_range_all):
     # Initializing - removing unwanted characters from the variable
-    chars = list(printable)
+    chars = list(printable)  # Imported from string - Has all the possible printable characters in the ASCII
     chars.pop(85)
     for p in range(6):
         chars.pop()
