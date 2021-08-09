@@ -12,7 +12,7 @@ import hashlib
 import binascii
 import colorama as cl
 
-
+# Log file configuraton
 log.basicConfig(
 
     level=log.INFO,
@@ -21,6 +21,7 @@ log.basicConfig(
 
 )
 
+# Colorama configuration
 cl.init(autoreset=True)
 
 Error = cl.Fore.RED
