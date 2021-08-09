@@ -7,5 +7,7 @@ instagram: _7amoodtarek
 
 Notes: 
 -> We do not save any user generated passwords.
--> Colorama does not belong to me and it's added to the repository because I got some import error. Your help would be amazing as I'm still a non-professional programer
--> I love you
+-> Colorama does not belong to me and it's added to the repository because I got some import error. Your help would be amazing as I'm still a non-professional programer.
+-> Generated passwords can be viewed in the empty file generatedPasswords.log, Do not edit or write anything on this folder.
+-> words in salts.txt are set as default and only for prefrences and can be editable if you want to edit the salts to be added to your generated passwords.
+-> I love you.
