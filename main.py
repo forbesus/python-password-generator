@@ -209,7 +209,7 @@ while True:
                     except KeyboardInterrupt:
                         pass
                     # End of password menu
-            except LengthError as e:  # Line 84
+            except LengthError as e:  # Line 35
                 print(e)
             except ValueError:
                 print(f"{Error}We cannot process this with any non-integer argument. please enter a valid range")
