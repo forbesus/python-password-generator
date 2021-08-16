@@ -2,7 +2,7 @@
 
 # Random password generator by Mohamed Tarek
 # Program made by a non-expert programmer to try something
-# Colour designs by Roopa Pabolu
+# Use your operating system's terminal to use this program
 # All rights reserved © 2021
 
 import logging as log
@@ -10,23 +10,21 @@ import random
 from string import *
 import hashlib
 import binascii
+import os
 import colorama as cl
 
-# Log file configuraton
+# Log file configuration
 log.basicConfig(
-
     level=log.INFO,
     format="%(asctime)s:%(message)s",
     filename="generatedPasswords.log"
-
 )
 
 # Colorama configuration
 cl.init(autoreset=True)
-
 Error = cl.Fore.RED
 Success = cl.Fore.GREEN
-Message = cl.Style.BRIGHT
+Message = cl.Fore.LIGHTWHITE_EX
 menuHeading = cl.Fore.YELLOW
 Choices = cl.Fore.BLUE
 
@@ -96,11 +94,8 @@ def int_length_checker(int_length):
 
 def app_starter():
     print(f"""{Message}
-
 Random password generator by Mohamed Tarek.
-
 All rights reserved © 2021
-
 Enter 0 to exit the program.
 """)
 
@@ -108,7 +103,6 @@ Enter 0 to exit the program.
 def main_menu():
     print(f"""{menuHeading}
 Please select any of the below choices:
-
 {Choices}
 1. Generate a random password
 2. View all the generated passwords
@@ -116,7 +110,6 @@ Please select any of the below choices:
 4. View all the ASCII characters
 5. Contact developer
 6. Help
-
 """)
 
 
@@ -127,36 +120,37 @@ Select one of the below options:
 1. Include everything (Recommended)
 2. Don't include symbols
 3. Don't include Uppercase letters
-
-
 """)
 
 
 def hash_options():
     print(f"""{menuHeading}
-
 Please choose one of the below hashing type:
 {Choices}
 1. SHA256 (Recommended)
 2. MD5
+""")
 
+
+# Extras & Details
+def hash_details(salt_used, iteration_num):
+    print(f"""{Message}
+Details {"-" * 100}
+{Message}-> Salt used: {Success}{salt_used}
+{Message}-> Number of iterations: {Success}{iteration_num}
 """)
 
 
 def contact_details():
     print(f"""{Success}
-
 Contact details ----------------------------------------------------------------
-
 -> Email: eaglechannel611@gmail.com
-
 socials ------------------------------------------------------------------------
-
 -> Instagram: _7amoodtarek
-
 """)
 
 
+# Starting of program
 if __name__ == "__main__":
     app_starter()
 # Infinite loop - program won't stop unless an argument of 0
@@ -198,8 +192,7 @@ while True:
                                 pass_gen_nocapitals(max_range)
                             break
                         else:
-                            print(
-                                f"{Error}Option {password_opt} is not in the list.")
+                            print(f"{Error}Option {password_opt} is not in the list.")
                     except ValueError:
                         print(f"{Error}We cannot process this with any non-integer argument. please enter a valid choice")
                     # EOFError and KeyboardInterrupt are errors that might occur when the user uses exiting shortcuts
@@ -221,8 +214,10 @@ while True:
         # Will return to main menu after procedure
         elif choice_num == 2:
             with open("generatedPasswords.log", "r") as f:
-                file = f.read()
-                print(file)
+                if os.stat("generatedPasswords.log").st_size == 0:
+                    print(f"{Error}You haven't generated any passwords yet")
+                else:
+                    print(f.read())
         elif choice_num == 3:
             try:
                 with open("salts.txt", "r") as f:
@@ -233,17 +228,22 @@ while True:
                 hash_type = int(input("> "))
                 print(f"{menuHeading}Enter your password: ")
                 user_pass = input("> ")
+                iterations = random.randint(5000, 10000)
                 if hash_type == 0:
                     print(f"{Success}Exited")
                     exit()
                 if hash_type == 1:
-                    type_sha = hashlib.pbkdf2_hmac("sha256", user_pass.encode(), salt.encode(), random.randint(5000, 10000))
+                    type_sha = hashlib.pbkdf2_hmac("sha256", user_pass.encode(), salt.encode(), iterations)
                     final_sha = str(binascii.hexlify(type_sha))
                     print(f"{Message}Your hashed password: {Success}{(final_sha[2 :]).rstrip(final_sha[-1])}")
+                    if __name__ == "__main__":
+                        hash_details(salt_used=salt, iteration_num=iterations)
                 elif hash_type == 2:
                     type_md5 = hashlib.pbkdf2_hmac("md5", user_pass.encode(), salt.encode(), random.randint(5000, 10000))
                     final_md5 = str(binascii.hexlify(type_md5))
-                    print(f"{Message}Your hashed password: {Success}{(final_md5[2:]).rstrip(final_md5[-1])}")
+                    print(f"{Message}Your hashed password: {Success}{(final_md5[2 :]).rstrip(final_md5[-1])}")
+                    if __name__ == "__main__":
+                        hash_details(salt_used=salt, iteration_num=iterations)
                 else:
                     print(f"{Error}Wait a sec.. For goodness sake dude, please choose from the list!")
             except ValueError:
