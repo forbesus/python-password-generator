@@ -1,5 +1,7 @@
 # strong-password-generator
 
+If you used this app before you will pull changes, please make sure you back up your generated passwords! the file will be removed!
+
 If you need any help please feel free to contact me through my contact details.
 
 Email: mohdtarekelsayed2003
