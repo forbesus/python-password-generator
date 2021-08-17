@@ -51,4 +51,4 @@ ignore
 hover
 marvelous
 soft
-cosomak
+hard
