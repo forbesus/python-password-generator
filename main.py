@@ -239,7 +239,7 @@ while True:
                     if __name__ == "__main__":
                         hash_details(salt_used=salt, iteration_num=iterations)
                 elif hash_type == 2:
-                    type_md5 = hashlib.pbkdf2_hmac("md5", user_pass.encode(), salt.encode(), random.randint(5000, 10000))
+                    type_md5 = hashlib.pbkdf2_hmac("md5", user_pass.encode(), salt.encode(), iterations)
                     final_md5 = str(binascii.hexlify(type_md5))
                     print(f"{Message}Your hashed password: {Success}{(final_md5[2 :]).rstrip(final_md5[-1])}")
                     if __name__ == "__main__":
