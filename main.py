@@ -262,9 +262,9 @@ while True:  # Infinite loop - program won't stop unless an argument of 0
                         print(f"{message}Your hashed password: {success}{(final_sha[2 :]).rstrip(final_sha[-1])}")
                         if __name__ == "__main__":
                             hash_details(salt_used=salt, iteration_num=iterations)
-                    except EmptyCrap:  # See line 37 & line
+                    except EmptyCrap:
                         type_sha = hashlib.sha256(user_pass.encode("utf-8"))
-                        print(f"{message}Your hashed password: {type_sha.hexdigest()}")
+                        print(f"{message}Your hashed password: {success}{type_sha.hexdigest()}\n")
                         print(f"{warn}Warning: This is the original hash of your password and can be decrypted easily without a salt")
                 elif hash_type == 2:
                     try:
@@ -276,7 +276,7 @@ while True:  # Infinite loop - program won't stop unless an argument of 0
                             hash_details(salt_used=salt, iteration_num=iterations)
                     except EmptyCrap:
                         type_md5 = hashlib.md5(user_pass.encode("utf-8"))
-                        print(f"{message}Your hashed password: {type_md5.hexdigest()}")
+                        print(f"{message}Your hashed password: {success}{type_md5.hexdigest()}\n")
                         print(f"{warn}Warning: This is the original hash of your password and can be decrypted easily without a salt")
                 else:
                     print(f"{error}Wait a sec.. For goodness sake dude, please choose from the list!")
