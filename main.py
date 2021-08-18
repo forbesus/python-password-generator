@@ -1,8 +1,7 @@
 #!/bin/bash
 
 # Random password generator by Mohamed Tarek
-# Program made by a non-expert programmer to try something
-# Use your operating system's terminal to use this program
+# Program written by non-expert programmer just to try something
 # All rights reserved © 2021
 
 import logging as log
@@ -16,22 +15,35 @@ import colorama as cl
 # Log file configuration
 log.basicConfig(
     level=log.INFO,
-    format="%(asctime)s:%(message)s",
+    format="%(asctime)s -> %(message)s",
     filename="generatedPasswords.log"
 )
 
-# Colorama configuration
+# Colorama configuration1
 cl.init(autoreset=True)
-Error = cl.Fore.RED
-Success = cl.Fore.GREEN
-Message = cl.Fore.LIGHTWHITE_EX
-menuHeading = cl.Fore.YELLOW
-Choices = cl.Fore.BLUE
+error = cl.Fore.RED
+success = cl.Fore.GREEN
+message = cl.Fore.LIGHTWHITE_EX
+menu_heading = cl.Fore.YELLOW
+choices = cl.Fore.BLUE
+warn = cl.Fore.LIGHTYELLOW_EX
 
 
-# Errors - LengthError
+# Errors
 class LengthError(Exception):
     pass
+
+
+class EmptyCrap(Exception):
+    pass
+
+
+def exiting_app():
+    # Holds the screen in case program ran as exe or other
+    import time
+    print(f"\n{success}Exiting...")
+    time.sleep(1)
+    exit()
 
 
 # Password generating
@@ -44,12 +56,12 @@ def pass_gen_all(max_range_all):
     password = ""
     max_range_all = int(max_range_all)
     if max_range_all == 0:
-        print(f"{Success}Exited")
-        exit()
+        if __name__ == "__main__":
+            exiting_app()
     else:
         for i in range(max_range_all):
             password += random.choice(chars)
-        print(f"{Message}Generated password: {Success}{password}")
+        print(f"{message}Generated password: {success}{password}")
         log.info(f"Password: {password}\n")
 
 
@@ -60,12 +72,13 @@ def pass_gen_nocapitals(max_range_nocapitals):
     password = ""
     max_range_nocapitals = int(max_range_nocapitals)
     if max_range_nocapitals == 0:
-        print(f"{Success}Exited")
+        if __name__ == "__main__":
+            exiting_app()
         exit()
     else:
         for i in range(max_range_nocapitals):
             password += random.choice(chars)
-        print(f"{Message}Generated password: {Success}{password}")
+        print(f"{message}Generated password: {success}{password}")
         log.info(f"Password: {password}\n")
 
 
@@ -77,23 +90,27 @@ def pass_gen_nosymbols(max_range_nosymbols):
     password = ""
     max_range_nosymbols = int(max_range_nosymbols)
     if max_range_nosymbols == 0:
-        print(f"{Success}Exited")
-        exit()
+        if __name__ == "__main__":
+            exiting_app()
     else:
         for i in range(max_range_nosymbols):
             password += random.choice(chars)
-        print(f"{Message}Generated password: {Success}{password}")
+        print(f"{message}Generated password: {success}{password}")
         log.info(f"Password: {password}\n")
 
 
 def int_length_checker(int_length):
     if int(int_length) < 9 or int(int_length) > 42:  # Editable
-        raise LengthError(
-            f"{Error}Please enter a range between 9 and 42. Mostly passwords below or above that range are not usable.")
+        raise LengthError(f"{error}Please enter a range between 9 and 42. Mostly passwords below or above that range are not usable.")
+
+
+def file_checker(filename):
+    if os.stat(filename).st_size == 0:
+        raise EmptyCrap
 
 
 def app_starter():
-    print(f"""{Message}
+    print(f"""{message}
 Random password generator by Mohamed Tarek.
 All rights reserved © 2021
 Enter 0 to exit the program.
@@ -101,9 +118,9 @@ Enter 0 to exit the program.
 
 
 def main_menu():
-    print(f"""{menuHeading}
+    print(f"""{menu_heading}
 Please select any of the below choices:
-{Choices}
+{choices}
 1. Generate a random password
 2. View all the generated passwords
 3. Hash a password
@@ -114,9 +131,9 @@ Please select any of the below choices:
 
 
 def pass_options():
-    print(f"""{menuHeading}
+    print(f"""{menu_heading}
 Select one of the below options:
-{Choices}
+{choices}
 1. Include everything (Recommended)
 2. Don't include symbols
 3. Don't include Uppercase letters
@@ -124,9 +141,9 @@ Select one of the below options:
 
 
 def hash_options():
-    print(f"""{menuHeading}
+    print(f"""{menu_heading}
 Please choose one of the below hashing type:
-{Choices}
+{choices}
 1. SHA256 (Recommended)
 2. MD5
 """)
@@ -134,41 +151,41 @@ Please choose one of the below hashing type:
 
 # Extras & Details
 def hash_details(salt_used, iteration_num):
-    print(f"""{Message}
+    print(f"""{message}
 Details {"-" * 100}
-{Message}-> Salt used: {Success}{salt_used}
-{Message}-> Number of iterations: {Success}{iteration_num}
+{message}-> Salt used: {success}{salt_used}
+{message}-> Number of iterations: {success}{iteration_num}
 """)
 
 
 def contact_details():
-    print(f"""{Success}
+    print(f"""{success}
 Contact details ----------------------------------------------------------------
--> Email: eaglechannel611@gmail.com
+-> Email: mohdtarekelsayed2003@gmail.com
 socials ------------------------------------------------------------------------
 -> Instagram: _7amoodtarek
+-> Discord: Shikabala#6224
 """)
 
 
 # Starting of program
 if __name__ == "__main__":
     app_starter()
-# Infinite loop - program won't stop unless an argument of 0
-while True:
+while True:  # Infinite loop - program won't stop unless an argument of 0
     try:
         if __name__ == "__main__":
             main_menu()
         choice_num = int(input("> "))
         if choice_num == 0:
-            print(f"{Success}Exited")
-            exit()
+            if __name__ == "__main__":
+                exiting_app()
         if choice_num == 1:
             try:
-                print(f"{menuHeading}Enter a range: ")
+                print(f"{menu_heading}Enter a range: ")
                 max_range = int(input("> "))
                 if max_range == 0:
-                    print(f"{Success}Exited")
-                    exit()
+                    if __name__ == "__main__":
+                        exiting_app()
                 if __name__ == "__main__":
                     int_length_checker(max_range)
                 while True:
@@ -177,8 +194,8 @@ while True:
                             pass_options()
                         password_opt = int(input("> "))
                         if password_opt == 0:
-                            print(f"{Success}Exited")
-                            exit("")
+                            if __name__ == "__main__":
+                                exiting_app()
                         if password_opt == 1:
                             if __name__ == "__main__":
                                 pass_gen_all(max_range)
@@ -192,69 +209,88 @@ while True:
                                 pass_gen_nocapitals(max_range)
                             break
                         else:
-                            print(f"{Error}Option {password_opt} is not in the list.")
+                            print(f"{error}Option {password_opt} is not in the list.")
                     except ValueError:
-                        print(f"{Error}We cannot process this with any non-integer argument. please enter a valid choice")
+                        print(
+                            f"{error}We cannot process this with any non-integer argument. please enter a valid choice")
                     # EOFError and KeyboardInterrupt are errors that might occur when the user uses exiting shortcuts
                     except EOFError:
-                        print(f"\n{Success}Exited")
-                        exit()
+                        if __name__ == "__main__":
+                            exiting_app()
                     except KeyboardInterrupt:
                         pass
                     # End of password menu
             except LengthError as e:  # Line 35
                 print(e)
             except ValueError:
-                print(f"{Error}We cannot process this with any non-integer argument. please enter a valid range")
+                print(f"{error}We cannot process this with any non-integer argument. please enter a valid range")
             except EOFError:
-                print(f"\n{Success}Exited")
+                if __name__ == "__main__":
+                    exiting_app()
                 exit()
             except KeyboardInterrupt:
-                print(f"\n{Success}Exited")
+                pass
         # Will return to main menu after procedure
         elif choice_num == 2:
             with open("generatedPasswords.log", "r") as f:
                 if os.stat("generatedPasswords.log").st_size == 0:
-                    print(f"{Error}You haven't generated any passwords yet")
+                    print(f"{error}You haven't generated any password yet!")
                 else:
                     print(f.read())
         elif choice_num == 3:
             try:
                 with open("salts.txt", "r") as f:
                     file = f.readlines()
-                    salt = random.choice(file)
+                    if os.stat("salts.txt").st_size == 0:
+                        print(f"{warn}Warning: salts.txt is empty. Your password can still be hashed but it's always a good idea to add salt to it")
+                    else:
+                        salt = random.choice(file)
                 if __name__ == "__main__":
                     hash_options()
                 hash_type = int(input("> "))
-                print(f"{menuHeading}Enter your password: ")
+                print(f"{menu_heading}Enter your password: ")
                 user_pass = input("> ")
                 iterations = random.randint(5000, 10000)
                 if hash_type == 0:
-                    print(f"{Success}Exited")
-                    exit()
+                    if __name__ == "__main__":
+                        exiting_app()
                 if hash_type == 1:
-                    type_sha = hashlib.pbkdf2_hmac("sha256", user_pass.encode(), salt.encode(), iterations)
-                    final_sha = str(binascii.hexlify(type_sha))
-                    print(f"{Message}Your hashed password: {Success}{(final_sha[2 :]).rstrip(final_sha[-1])}")
-                    if __name__ == "__main__":
-                        hash_details(salt_used=salt, iteration_num=iterations)
+                    try:
+                        file_checker("salts.txt")
+                        type_sha = hashlib.pbkdf2_hmac("sha256", user_pass.encode("utf-8"), salt.encode("utf-8"), iterations)
+                        final_sha = str(binascii.hexlify(type_sha))
+                        print(f"{message}Your hashed password: {success}{(final_sha[2 :]).rstrip(final_sha[-1])}")
+                        if __name__ == "__main__":
+                            hash_details(salt_used=salt, iteration_num=iterations)
+                    except EmptyCrap:  # See line 37 & line
+                        type_sha = hashlib.sha256(user_pass.encode("utf-8"))
+                        print(f"{message}Your hashed password: {type_sha.hexdigest()}")
+                        print(f"{warn}Warning: This is the original hash of your password and can be decrypted easily without a salt")
                 elif hash_type == 2:
-                    type_md5 = hashlib.pbkdf2_hmac("md5", user_pass.encode(), salt.encode(), iterations)
-                    final_md5 = str(binascii.hexlify(type_md5))
-                    print(f"{Message}Your hashed password: {Success}{(final_md5[2 :]).rstrip(final_md5[-1])}")
-                    if __name__ == "__main__":
-                        hash_details(salt_used=salt, iteration_num=iterations)
+                    try:
+                        file_checker("salts.txt")
+                        type_md5 = hashlib.pbkdf2_hmac("md5", user_pass.encode("utf-8"), salt.encode("utf-8"), iterations)
+                        final_md5 = str(binascii.hexlify(type_md5))
+                        print(f"{message}Your hashed password: {success}{(final_md5[2 :]).rstrip(final_md5[-1])}")
+                        if __name__ == "__main__":
+                            hash_details(salt_used=salt, iteration_num=iterations)
+                    except EmptyCrap:
+                        type_md5 = hashlib.md5(user_pass.encode("utf-8"))
+                        print(f"{message}Your hashed password: {type_md5.hexdigest()}")
+                        print(f"{warn}Warning: This is the original hash of your password and can be decrypted easily without a salt")
                 else:
-                    print(f"{Error}Wait a sec.. For goodness sake dude, please choose from the list!")
+                    print(f"{error}Wait a sec.. For goodness sake dude, please choose from the list!")
+            except FileNotFoundError:
+                print(f"{error}Oops! It looks like salts.txt is deleted or either you didn't install it properly lol. Please reinstall this repository and try again")
             except ValueError:
-                print(f"{Error}The choice list is displayed with numbers nothing else. Please choose a valid choice.")
+                print(f"{error}The choice list is displayed with numbers nothing else. Please choose a valid choice.")
             except EOFError:
-                print(f"\n{Success}Exited")
-                exit()
+                if __name__ == "__main__":
+                    exiting_app()
             except KeyboardInterrupt:
-                print(f"\n{Success}Exited")
+                pass
         elif choice_num == 4:
-            print(f"{Success}{printable}")
+            print(f"{success}{printable}")
         elif choice_num == 5:
             if __name__ == "__main__":
                 contact_details()
@@ -263,13 +299,14 @@ while True:
                 print(f.read())
         else:
             print(
-                f"{Error}You don't see an option {choice_num} there don't you? please select the choices that are available.")
+                f"{error}You don't see an option {choice_num} there don't you? please select the choices that are available.")
     except ValueError:
-        print(f"{Error}The choice list is displayed with numbers nothing else. Please choose depends on the choice list.")
+        print(
+            f"{error}The choice list is displayed with numbers nothing else. Please choose depends on the choice list.")
     except EOFError:
-        print(f"\n{Success}Exited")
-        exit()
+        if __name__ == "__main__":
+            exiting_app()
     except KeyboardInterrupt:
-        print(f"\n{Success}Exited")
-        exit()
+        if __name__ == "__main__":
+            exiting_app()
 # End of the script.
