@@ -66,7 +66,7 @@ def pass_gen_all(max_range_all):
 
 
 def pass_gen_nocapitals(max_range_nocapitals):
-    temp = ascii_lowercase + digits + punctuation  # Imported from string
+    temp = ascii_lowercase + digits + punctuation  # Imported from string.
     chars = list(temp)
     chars.pop(59)
     password = ""
