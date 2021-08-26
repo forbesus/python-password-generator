@@ -6,6 +6,7 @@ If you need any help please feel free to contact me through my contact details.
 
 Email: mohdtarekelsayed2003@gmail.com
 instagram: _7amoodtarek
+discord: Shikabala#6224
 
 Notes: 
 -> We do not save any user generated passwords.
