@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # Random password generator by Mohamed Tarek
-# Program written by non-expert programmer just to try something
 # All rights reserved © 2021
 
 import logging as log
@@ -211,9 +210,8 @@ while True:  # Infinite loop - program won't stop unless an argument of 0
                         else:
                             print(f"{error}Option {password_opt} is not in the list.")
                     except ValueError:
-                        print(
-                            f"{error}We cannot process this with any non-integer argument. please enter a valid choice")
-                    # EOFError and KeyboardInterrupt are errors that might occur when the user uses exiting shortcuts
+                        print(f"{error}We cannot process this with any non-integer argument. please enter a valid choice")
+                        # EOFError and KeyboardInterrupt are errors that might occur when the user uses exiting shortcuts
                     except EOFError:
                         if __name__ == "__main__":
                             exiting_app()
