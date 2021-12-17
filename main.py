@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # Random password generator by Mohamed Tarek
-# All rights reserved © 2021
 
 import logging as log
 import random
@@ -110,59 +109,50 @@ def main():
 
     def app_starter():
         print(f"""{message}
-    Random password generator by Mohamed Tarek.
-    All rights reserved © 2021
-    Enter 0 to exit the program.
-    """)
+Random password generator by Mohamed Tarek.
+Enter 0 to exit the program.
+""")
 
 
     def main_menu():
         print(f"""{menu_heading}
-    Please select any of the below choices:
-    {choices}
-    1. Generate a random password
-    2. View all the generated passwords
-    3. Hash a password
-    4. View all the ASCII characters
-    5. Contact developer
-    6. Help
-    """)
+Please select any of the below choices:
+{choices}
+1. Generate a random password
+2. View all the generated passwords
+3. Hash a password
+4. View all the ASCII characters
+5. Contact developer
+6. Help
+""")
 
 
     def pass_options():
         print(f"""{menu_heading}
-    Select one of the below options:
-    {choices}
-    1. Include everything (Recommended)
-    2. Don't include symbols
-    3. Don't include Uppercase letters
-    """)
+Select one of the below options:
+{choices}
+1. Include everything (Recommended)
+2. Don't include symbols
+3. Don't include Uppercase letters
+""")
 
 
     def hash_options():
         print(f"""{menu_heading}
-    Please choose one of the below hashing type:
-    {choices}
-    1. SHA256 (Recommended)
-    2. MD5
-    """)
+Please choose one of the below hashing type:
+{choices}
+1. SHA256 (Recommended)
+2. MD5
+""")
 
 
     # Extras & Details
     def hash_details(salt_used, iteration_num):
         print(f"""{message}
-    Details {"-" * 100}
-    {message}-> Salt used: {success}{salt_used}
-    {message}-> Number of iterations: {success}{iteration_num}
-    """)
-
-
-    def contact_details():
-        print(f"""{success}
-    Contact details ----------------------------------------------------------------
-    -> Email: mohdtarekelsayed2003@gmail.com
-    """)
-
+Details {"-" * 100}
+{message}-> Salt used: {success}{salt_used}
+{message}-> Number of iterations: {success}{iteration_num}
+""")
 
     # Starting of program
     app_starter()
@@ -269,8 +259,6 @@ def main():
             elif choice_num == 4:
                 print(f"{success}{printable}")
             elif choice_num == 5:
-                contact_details()
-            elif choice_num == 6:
                 with open("README.md", "r") as f:
                     print(f.read())
             else:
